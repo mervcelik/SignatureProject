@@ -7,7 +7,7 @@ using Application.Features.Users.Queries.GetList;
 using AutoMapper;
 using Core.Application.Request;
 using Core.Persistence.Paging;
-using Core.Security.Entities;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

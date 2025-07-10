@@ -80,7 +80,7 @@ public class EnableEmailAuthenticatorCommand : IRequest, ISecuredRequest
                 new Mail
                 {
                     ToList = toEmailList,
-                    Subject = "Verify Your Email - NArchitecture",
+                    Subject = "Verify Your Email - SignatureProject",
                     TextBody =
                         $"Click on the link to verify your email: {request.VerifyEmailUrlPrefix}?ActivationKey={HttpUtility.UrlEncode(addedEmailAuthenticator.ActivationKey)}"
                 }

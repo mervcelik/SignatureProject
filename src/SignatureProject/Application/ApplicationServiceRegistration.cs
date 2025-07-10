@@ -60,7 +60,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IAuthService, AuthManager>();
         services.AddScoped<IAuthenticatorService, AuthenticatorManager>();
 
-        services.AddYamlResourceLocalization();
+  
         return services;
     }
 

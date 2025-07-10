@@ -18,7 +18,7 @@ builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceService(builder.Configuration);
 builder.Services.AddSecurityServices();
 builder.Services.AddHttpContextAccessor();
-
+builder.Services.AddYamlResourceLocalization();
 builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = "localhost:6379";
