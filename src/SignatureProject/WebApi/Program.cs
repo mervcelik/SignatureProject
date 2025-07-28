@@ -11,8 +11,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+}); ;
 
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddUserSecrets<Program>() // ?? Bu satýr çok önemli
+    .AddEnvironmentVariables();
 
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceService(builder.Configuration);
@@ -62,7 +70,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
-if (app.Environment.IsProduction())
+//if (app.Environment.IsProduction())
     app.configureExceptionMiddleware();
 app.UseHttpsRedirection();
 

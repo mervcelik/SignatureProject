@@ -1,0 +1,29 @@
+﻿<Window x:Class="Signify.WPF.Forms.Shared.VerifyEmailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Signify.WPF.Forms.Shared"
+        mc:Ignorable="d"
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Signify"
+        Height="250"
+        Width="450"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource MaterialDesignPaper}">
+    <Grid Margin="5">
+        <materialDesign:Card Padding="10" UniformCornerRadius="10" >
+            <StackPanel >
+                <TextBlock Text="Mailinize Gelen Doğrulama Kodunu Giriniz"  FontSize="20" Foreground="Gray" HorizontalAlignment="Center" Margin="10"/>
+                <TextBox materialDesign:HintAssist.Hint="Doğrulama Kodu" 
+             Style="{StaticResource MaterialDesignFilledTextBox}"
+                Height="50"
+                x:Name="VerifyEmailTextBox" 
+                Foreground="Black" Margin="10"/>
+                <Button  Style="{StaticResource MaterialDesignFlatLightBgButton}" IsDefault="True" Content="Doğrula" x:Name="SingUpButton"
+                        Click="SingUpButton_Click" Height="43" Margin="10" BorderBrush="#FF585656"/>
+            </StackPanel>
+        </materialDesign:Card>
+    </Grid>
+</Window>

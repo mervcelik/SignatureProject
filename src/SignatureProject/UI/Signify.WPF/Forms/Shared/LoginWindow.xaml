@@ -1,0 +1,61 @@
+﻿<Window x:Class="Signify.WPF.Forms.Shared.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Signify"
+        Height="600"
+        Width="500"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource MaterialDesignPaper}">
+    <Grid Margin="20">
+        <materialDesign:Card Padding="30" UniformCornerRadius="20" >
+            <StackPanel VerticalAlignment="Center" Height="485">
+
+                <Image
+      Height="182"
+      Source="pack://application:,,,/Resources/logo.png"
+      Stretch="UniformToFill" Width="274" 
+                    Name="logoImg"/>
+
+                <!-- Welcome Text -->
+                <TextBlock Text="Welcome Back!" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" />
+                <TextBlock Text="We missed you! Please enter your details." 
+                           FontSize="13" Foreground="Gray" HorizontalAlignment="Center"/>
+
+                <!-- Email Field -->
+                <TextBox materialDesign:HintAssist.Hint="Email" 
+                      Style="{StaticResource MaterialDesignFilledTextBox}"
+                         Height="40"
+                         Margin="0,16,0,10"
+                         Name="txtEmail"
+                         Foreground="Black"/>
+
+                <!-- Password Field -->
+                <PasswordBox materialDesign:HintAssist.Hint="Password"
+                              Style="{StaticResource MaterialDesignFilledPasswordBox}"
+                             Height="40"
+                             Name="Password"
+                             Foreground="Black"/>
+
+                <!-- Remember me and Forgot password -->
+                <DockPanel Margin="0,5,0,0">
+                    <CheckBox Content="Remember me" VerticalAlignment="Center" Name="checkRememeberMe"/>
+                    <TextBlock Text="Forgot password?" Foreground="{DynamicResource PrimaryHueMidBrush}"
+                               Cursor="Hand"  DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Margin="0,0,0,5" Width="109" MouseDown="TxtForgetPasword_MouseDown"/>
+                </DockPanel>
+
+                <!-- Sign In Button -->
+                <Button Content="Sign in"
+                        Height="45"
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        Margin="0,10,0,0" Background="#FF6E528A"
+                        Click="Login_Click"
+                        />
+            </StackPanel>
+        </materialDesign:Card>
+    </Grid>
+</Window>

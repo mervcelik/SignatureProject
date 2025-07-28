@@ -6,15 +6,16 @@ using Application.Features.Auth.Commands.Register;
 using Application.Features.Auth.Commands.RevokeToken;
 using Application.Features.Auth.Commands.VerifyEmailAuthenticator;
 using Application.Features.Auth.Commands.VerifyOtpAuthenticator;
+using Application.Features.Users.Queries.GetById;
 using Core.Application.Dtos;
+using Core.CrossCuttingConcerns.Dtos;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using static Application.Features.Auth.Commands.Login.LoggedResponse;
 
 namespace WebApi.Controllers;
 
-[Route("api/[controller]")]
-[ApiController]
 public class AuthController : BaseController
 {
     private readonly WebApiConfiguration _configuration;
@@ -28,15 +29,14 @@ public class AuthController : BaseController
     }
 
     [HttpPost("Login")]
-    public async Task<IActionResult> Login([FromBody] UserForLoginDto userForLoginDto)
+    public async Task<IActionResult> Login([FromBody] LoginCommand loginCommand)
     {
-        LoginCommand loginCommand = new() { UserForLoginDto = userForLoginDto, IpAddress = getIpAddress() };
         LoggedResponse result = await Mediator.Send(loginCommand);
 
         if (result.RefreshToken is not null)
             setRefreshTokenToCookie(result.RefreshToken);
 
-        return Ok(result.ToHttpResponse());
+        return CreateActionResult(ResponseDto<LoggedHttpResponse>.Success(result.ToHttpResponse()));
     }
 
     [HttpPost("Register")]

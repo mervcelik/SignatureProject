@@ -39,9 +39,22 @@ public class AuthManager : IAuthService
     {
         IList<OperationClaim> operationClaims = await _userOperationClaimRepository.GetOperationClaimsByUserIdAsync(user.Id);
 
-        IList<Core.Security.Entities.OperationClaim> lst =_mapper.Map<IList<Core.Security.Entities.OperationClaim>>(operationClaims);
-        var userEntity = _mapper.Map<Core.Security.Entities.User>(user);
-        AccessToken accessToken = _tokenHelper.CreateToken(userEntity, lst );
+        IList<Core.Security.Entities.OperationClaim> lst = _mapper.Map<IList<Core.Security.Entities.OperationClaim>>(operationClaims);
+        var userEntity = new Core.Security.Entities.User
+        {
+            AuthenticatorType = (Core.Security.Enums.AuthenticatorType)user.AuthenticatorType,
+            CreatedDate = user.CreatedDate,
+            DeletedDate = user.DeletedDate,
+            Email = user.Email,
+            Id = user.Id,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            PasswordHash = user.PasswordHash,
+            PasswordSalt = user.PasswordSalt,
+            UpdatedDate = user.UpdatedDate,
+            Status = user.Status,
+        };
+        AccessToken accessToken = _tokenHelper.CreateToken(userEntity, lst);
         return accessToken;
     }
 
@@ -53,7 +66,7 @@ public class AuthManager : IAuthService
 
     public async Task DeleteOldRefreshTokens(int userId)
     {
-        List<RefreshToken> refreshTokens = await _refreshTokenRepository.GetOldRefreshTokensAsync(userId,  _tokenOptions.RefreshTokenTTL);
+        List<RefreshToken> refreshTokens = await _refreshTokenRepository.GetOldRefreshTokensAsync(userId, _tokenOptions.RefreshTokenTTL);
         await _refreshTokenRepository.DeleteRangeAsync(refreshTokens);
     }
 
@@ -79,8 +92,21 @@ public class AuthManager : IAuthService
 
     public async Task<RefreshToken> RotateRefreshToken(User user, RefreshToken refreshToken, string ipAddress)
     {
-        var userEntity = _mapper.Map<Core.Security.Entities.User>(user);
-        Core.Security.Entities.RefreshToken newCoreRefreshToken = _tokenHelper.CreateRefreshToken(userEntity, ipAddress );
+        var userEntity = new Core.Security.Entities.User
+        {
+            AuthenticatorType = (Core.Security.Enums.AuthenticatorType)user.AuthenticatorType,
+            CreatedDate = user.CreatedDate,
+            DeletedDate = user.DeletedDate,
+            Email = user.Email,
+            Id = user.Id,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            PasswordHash = user.PasswordHash,
+            PasswordSalt = user.PasswordSalt,
+            UpdatedDate = user.UpdatedDate,
+            Status = user.Status,
+        };
+        Core.Security.Entities.RefreshToken newCoreRefreshToken = _tokenHelper.CreateRefreshToken(userEntity, ipAddress);
         RefreshToken newRefreshToken = _mapper.Map<RefreshToken>(newCoreRefreshToken);
         await RevokeRefreshToken(refreshToken, ipAddress, reason: "Replaced by new token", newRefreshToken.Token);
         return newRefreshToken;
@@ -100,7 +126,20 @@ public class AuthManager : IAuthService
 
     public Task<RefreshToken> CreateRefreshToken(User user, string ipAddress)
     {
-        var userEntity = _mapper.Map<Core.Security.Entities.User>(user);
+        var userEntity = new Core.Security.Entities.User
+        {
+            AuthenticatorType = (Core.Security.Enums.AuthenticatorType)user.AuthenticatorType,
+            CreatedDate = user.CreatedDate,
+            DeletedDate = user.DeletedDate,
+            Email = user.Email,
+            Id = user.Id,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            PasswordHash = user.PasswordHash,
+            PasswordSalt = user.PasswordSalt,
+            UpdatedDate = user.UpdatedDate,
+            Status = user.Status,
+        };
         Core.Security.Entities.RefreshToken coreRefreshToken = _tokenHelper.CreateRefreshToken(userEntity, ipAddress);
         RefreshToken refreshToken = _mapper.Map<RefreshToken>(coreRefreshToken);
         return Task.FromResult(refreshToken);

@@ -18,5 +18,6 @@ public class MappingProfiles : Profile
         CreateMap<RefreshToken, RevokedTokenResponse>().ReverseMap();
         CreateMap<Core.Security.Entities.OperationClaim, OperationClaim>().ReverseMap();
         CreateMap<Core.Security.Entities.User, User>().ReverseMap();
+        CreateMap<User, Core.Security.Entities.User>().ReverseMap();
     }
 }

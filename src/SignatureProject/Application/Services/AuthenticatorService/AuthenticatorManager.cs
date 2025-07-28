@@ -102,8 +102,8 @@ public class AuthenticatorManager : IAuthenticatorService
             new Mail
             {
                 ToList = toEmailList,
-                Subject = "Authenticator Code - NArchitecture",
-                TextBody = $"Enter your authenticator code: {authenticatorCode}"
+                Subject = "Authenticator Code - Signify",
+                HtmlBody= string.Format("Enter your authenticator code: {0}", authenticatorCode)
             }
         );
     }

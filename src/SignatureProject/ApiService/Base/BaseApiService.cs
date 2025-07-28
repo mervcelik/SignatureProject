@@ -9,7 +9,7 @@ namespace ApiService.Base;
 public class BaseApiService
 {
     internal ApiServiceFactory _apiServiceFactory;
-    internal HttpClient _httpclient => _apiServiceFactory._httpClient;
+    internal HttpClient _httpClient => _apiServiceFactory._httpClient;
 
     public BaseApiService(ApiServiceFactory apiServiceFactory)
     {
