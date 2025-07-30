@@ -25,16 +25,17 @@
 
                 <!-- Email Field -->
                 <TextBox materialDesign:HintAssist.Hint="Email" 
-                      Style="{StaticResource MaterialDesignFilledTextBox}"
+                    Style="{StaticResource MaterialDesignFilledTextBox}"
                          Height="40"
                          Margin="0,16,0,10"
+                         Padding="2"
                          Name="txtEmail"
                          Foreground="Black"/>
-
                 <!-- Password Field -->
                 <PasswordBox materialDesign:HintAssist.Hint="Password"
                               Style="{StaticResource MaterialDesignFilledPasswordBox}"
                              Height="40"
+                             Padding="2"
                              Name="Password"
                              Foreground="Black"/>
 
@@ -43,7 +44,8 @@
                     <CheckBox Content="Remember me" VerticalAlignment="Center" Name="checkRememeberMe"/>
                     <TextBlock Text="Forgot password?" Foreground="{DynamicResource PrimaryHueMidBrush}"
                                Cursor="Hand"  DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Right"
-                               Margin="0,0,0,5" Width="109" MouseDown="TxtForgetPasword_MouseDown"/>
+                               Margin="0,0,0,5" Width="109" MouseDown="TxtForgetPasword_MouseDown"
+                               />
                 </DockPanel>
 
                 <!-- Sign In Button -->

@@ -39,7 +39,8 @@ namespace Signify.WPF
 
         private string LoadAccessToken()
         {
-            return null;
+            var token = Signify.WPF.Properties.Settings.Default.Token;
+            return token;
         }
 
         private void ConfigureServices(IServiceCollection services)

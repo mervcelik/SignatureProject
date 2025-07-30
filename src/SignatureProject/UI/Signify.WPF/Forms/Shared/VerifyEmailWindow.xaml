@@ -16,11 +16,13 @@
         <materialDesign:Card Padding="10" UniformCornerRadius="10" >
             <StackPanel >
                 <TextBlock Text="Mailinize Gelen Doğrulama Kodunu Giriniz"  FontSize="20" Foreground="Gray" HorizontalAlignment="Center" Margin="10"/>
-                <TextBox materialDesign:HintAssist.Hint="Doğrulama Kodu" 
-             Style="{StaticResource MaterialDesignFilledTextBox}"
-                Height="50"
-                x:Name="VerifyEmailTextBox" 
-                Foreground="Black" Margin="10"/>
+                <TextBox 
+                    materialDesign:HintAssist.Hint="Doğrulama Kodu" 
+                    Style="{StaticResource MaterialDesignFilledTextBox}"
+                    Height="50"
+                    x:Name="VerifyEmailTextBox" 
+                    Foreground="Black" Margin="10"
+                    Padding="2"/>
                 <Button  Style="{StaticResource MaterialDesignFlatLightBgButton}" IsDefault="True" Content="Doğrula" x:Name="SingUpButton"
                         Click="SingUpButton_Click" Height="43" Margin="10" BorderBrush="#FF585656"/>
             </StackPanel>

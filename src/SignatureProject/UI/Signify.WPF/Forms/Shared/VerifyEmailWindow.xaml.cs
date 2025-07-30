@@ -28,6 +28,11 @@ namespace Signify.WPF.Forms.Shared
         private void SingUpButton_Click(object sender, RoutedEventArgs e)
         {
             AuthenticatorCode = VerifyEmailTextBox.Text;
+            if (string.IsNullOrWhiteSpace(AuthenticatorCode))
+            {
+                MessageBox.Show("Please enter the verification code sent to your email.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             this.Close();
         }
     }

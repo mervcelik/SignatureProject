@@ -34,6 +34,15 @@ namespace Signify.WPF.Forms.Shared
             _authApiService = authApiService;
             _mainWindow = mainWindow;
             logoImg.Source = Properties.Resources.logo.ToImageSource();
+
+            var email = Properties.Settings.Default.UserEmail;
+            var password = Properties.Settings.Default.Password;
+            if (!string.IsNullOrWhiteSpace(email) && !string.IsNullOrWhiteSpace(email))
+            {
+                txtEmail.Text = email;
+                Password.Password = password;
+                checkRememeberMe.IsChecked = true;
+            }
         }
 
         private async void Login_Click(object sender, RoutedEventArgs e)
@@ -42,6 +51,10 @@ namespace Signify.WPF.Forms.Shared
             {
                 var email = txtEmail.Text;
                 var password = Password.Password;
+
+                Properties.Settings.Default.UserEmail = checkRememeberMe.IsChecked == true ? email : "";
+                Properties.Settings.Default.Password = checkRememeberMe.IsChecked == true ? password : "";
+                Properties.Settings.Default.Save();
 
                 var login = RNH.GetOrThrow(await _authApiService.LoginAsync(new Application.Features.Auth.Commands.Login.LoginCommand
                 {
@@ -60,6 +73,8 @@ namespace Signify.WPF.Forms.Shared
                     if (login2.AccessToken != null)
                     {
                         App.AccessToken = login2.AccessToken.Token;
+                        Properties.Settings.Default.Token = login2.AccessToken.Token;
+                        Properties.Settings.Default.Save();
                         _mainWindow.Show();
                         this.Close();
                     }
@@ -67,6 +82,8 @@ namespace Signify.WPF.Forms.Shared
                 else if (login.AccessToken != null)
                 {
                     App.AccessToken = login.AccessToken.Token;
+                    Properties.Settings.Default.Token = login.AccessToken.Token;
+                    Properties.Settings.Default.Save();
                     _mainWindow.Show();
                     this.Close();
                 }
