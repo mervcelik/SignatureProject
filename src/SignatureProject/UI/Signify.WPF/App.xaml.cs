@@ -1,6 +1,6 @@
 ﻿using ApiService.Registration;
 using Microsoft.Extensions.DependencyInjection;
-using Signify.WPF.Forms.Shared;
+using Signify.WPF.Windows;
 using System.Configuration;
 using System.Data;
 using System.Windows;

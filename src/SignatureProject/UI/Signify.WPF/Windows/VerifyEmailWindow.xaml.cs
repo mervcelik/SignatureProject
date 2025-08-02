@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Signify.WPF.Forms.Shared
+namespace Signify.WPF.Windows
 {
     /// <summary>
     /// Interaction logic for VerifyEmailWindow.xaml

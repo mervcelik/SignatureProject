@@ -63,36 +63,6 @@ namespace Signify.WPF.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] login_image {
-            get {
-                object obj = ResourceManager.GetObject("login_image", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] login_image2 {
-            get {
-                object obj = ResourceManager.GetObject("login_image2", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] login_image3 {
-            get {
-                object obj = ResourceManager.GetObject("login_image3", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
         internal static byte[] logo {
             get {
                 object obj = ResourceManager.GetObject("logo", resourceCulture);

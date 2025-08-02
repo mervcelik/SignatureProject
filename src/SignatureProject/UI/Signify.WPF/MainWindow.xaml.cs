@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Signify.WPF.UserControls;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -29,7 +30,14 @@ namespace Signify.WPF
                 this.DragMove();
             }
         }
-
+        private void TitleBar_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var workArea = SystemParameters.WorkArea;
+            this.Top = workArea.Top;
+            this.Left = workArea.Left;
+            this.Width = workArea.Width;
+            this.Height = workArea.Height;
+        }
         private void CloseApp_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
@@ -45,13 +53,23 @@ namespace Signify.WPF
 
         private void WindowMaximize_Click(object sender, RoutedEventArgs e)
         {
-            if (base.WindowState != WindowState.Maximized)
+
+            var workArea = SystemParameters.WorkArea;
+            if (Top == workArea.Top && Left == workArea.Left && Width == workArea.Width && Height == workArea.Height)
             {
-                base.WindowState = WindowState.Maximized;
+                this.Left = (SystemParameters.PrimaryScreenWidth - this.Width) / 2;
+                this.Top = (SystemParameters.PrimaryScreenHeight - this.Height) / 2;
+
+                this.Width = 1024;
+                this.Height = 728;
             }
             else
             {
-                base.WindowState = WindowState.Normal;
+                this.Top = workArea.Top;
+                this.Left = workArea.Left;
+                this.Width = workArea.Width;
+                this.Height = workArea.Height;
+    
             }
         }
         #endregion
@@ -78,20 +96,18 @@ namespace Signify.WPF
             UserControl usc = null;
             GridMain.Children.Clear();
 
-            //switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
-            //{
-            //    case "ItemHome":
-            //        usc = new UserControlHome();
-            //        GridMain.Children.Add(usc);
-            //        break;
-            //    case "ItemCreate":
-            //        usc = new UserControlCreate();
-            //        GridMain.Children.Add(usc);
-            //        break;
-            //    default:
-            //        break;
-            //}
+            switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
+            {
+                case "ItemHome":
+                    usc = new HomePage();
+                    GridMain.Children.Add(usc);
+                    break;
+                default:
+                    break;
+            }
         }
         #endregion
+
+      
     }
 }

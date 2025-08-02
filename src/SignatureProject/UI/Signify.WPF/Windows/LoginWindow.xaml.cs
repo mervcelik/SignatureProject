@@ -18,7 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace Signify.WPF.Forms.Shared
+namespace Signify.WPF.Windows
 {
     /// <summary>
     /// Interaction logic for LoginWindow.xaml

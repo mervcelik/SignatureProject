@@ -36,7 +36,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <materialDesign:Card Grid.Row="0" materialDesign:ElevationAssist.Elevation="Dp1"  Background="#F5F3FF" Height="40" MouseDown="TitleBar_MouseDown" VerticalAlignment="Top">
+            <materialDesign:Card Grid.Row="0" materialDesign:ElevationAssist.Elevation="Dp1"  Background="#F5F3FF" Height="40" MouseDown="TitleBar_MouseDown" VerticalAlignment="Top" MouseDoubleClick="TitleBar_MouseDoubleClick">
                 <StackPanel Name="TopBar" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0" Width="103">
 
                     <Button x:Name="WindowMinimize" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Click="WindowMinimize_Click">
