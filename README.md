@@ -25,7 +25,7 @@ Katmanlar aşağıdaki şekilde yapılandırılmıştır:
 - `RentACar.Persistence`
 - `RentACar.Infrastructure` 
 - `RentACar.WebAPI`
-- 
+
 ## 🔧 Kullanılan Teknolojiler
 - ASP.NET Core Web API
 - EF Core
