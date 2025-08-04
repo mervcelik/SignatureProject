@@ -20,6 +20,12 @@ Bu projede aşağıdaki konular uygulanarak geliştirildi:
 Bu proje, **nArchitecture.Core** altyapısını kullanarak geliştirilmiştir.  
 Katmanlar aşağıdaki şekilde yapılandırılmıştır:
 
+- `RentACar.Domain` 
+- `RentACar.Application`
+- `RentACar.Persistence`
+- `RentACar.Infrastructure` 
+- `RentACar.WebAPI`
+- 
 ## 🔧 Kullanılan Teknolojiler
 - ASP.NET Core Web API
 - EF Core
