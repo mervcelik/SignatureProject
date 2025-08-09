@@ -32,11 +32,7 @@ namespace Signify.WPF
         }
         private void TitleBar_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var workArea = SystemParameters.WorkArea;
-            this.Top = workArea.Top;
-            this.Left = workArea.Left;
-            this.Width = workArea.Width;
-            this.Height = workArea.Height;
+            ChangeSizeWindow();
         }
         private void CloseApp_Click(object sender, RoutedEventArgs e)
         {
@@ -53,7 +49,11 @@ namespace Signify.WPF
 
         private void WindowMaximize_Click(object sender, RoutedEventArgs e)
         {
+            ChangeSizeWindow();
+        }
 
+        private void ChangeSizeWindow()
+        {
             var workArea = SystemParameters.WorkArea;
             if (Top == workArea.Top && Left == workArea.Left && Width == workArea.Width && Height == workArea.Height)
             {
@@ -69,7 +69,7 @@ namespace Signify.WPF
                 this.Left = workArea.Left;
                 this.Width = workArea.Width;
                 this.Height = workArea.Height;
-    
+
             }
         }
         #endregion

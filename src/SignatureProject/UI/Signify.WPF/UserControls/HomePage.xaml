@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Signify.WPF.UserControls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+             d:DesignHeight="450" d:DesignWidth="800"  Background="#F5F3FF">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -24,7 +24,7 @@
     </UserControl.Resources>
     <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
@@ -33,8 +33,8 @@
                 <RowDefinition Height="150"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
-            <materialDesign:Card Grid.Row="0" materialDesign:ElevationAssist.Elevation="Dp1"  Background="#F5F3FF" UniformCornerRadius="20" Padding="5">
+
+            <materialDesign:Card Grid.Row="0" materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="20" Padding="5" Margin="5">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -54,16 +54,14 @@
                    FontSize="11" 
                    FontWeight="SemiBold" 
                    HorizontalAlignment="Left" 
-                   VerticalAlignment="Center" 
-                   Margin="0 5 0 0"/>
+                   Margin="0 5 0 0" TextWrapping="Wrap"/>
 
                         <TextBlock Text="Keep it up and improve your results!" 
                    Foreground="SlateGray" 
                    FontSize="11" 
                    FontWeight="SemiBold" 
                    HorizontalAlignment="Left" 
-                   VerticalAlignment="Center" 
-                   Margin="0 5 0 0"/>
+                   Margin="0 5 0 0" TextWrapping="Wrap"/>
                     </StackPanel>
 
                     <Image RenderOptions.BitmapScalingMode="HighQuality" 
@@ -72,9 +70,51 @@
                 </Grid>
 
             </materialDesign:Card>
+
+            <Grid Grid.Row="1" Margin="5"   >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <materialDesign:Card Grid.Column="0" materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="20" Padding="5" Margin="5">
+                    son imzalar listelecek
+                </materialDesign:Card>
+                
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="150"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <materialDesign:Card Grid.Row="0"  materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="20" Padding="5" Margin="5">
+
+                    </materialDesign:Card>
+                    <materialDesign:Card Grid.Row="1"  materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="20" Padding="5" Margin="5">
+
+                    </materialDesign:Card>
+                </Grid>
+        
+            </Grid>
         </Grid>
         <Grid Grid.Column="1">
-            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="180"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <materialDesign:Card Grid.Row="0" Margin="5" materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="20">
+                <Calendar />
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Row="1" Margin="5" materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="20">
+                <StackPanel Margin="10">
+                    <TextBlock Text="Kampanya 1" FontWeight="Bold" FontSize="14" Margin="0 0 0 5"/>
+                    <TextBlock Text="Kampanya açıklaması burada yer alacak." Margin="0 0 0 10"/>
+                    <Button Content="Detaylar" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Left"/>
+
+                    <TextBlock Text="Duyuru 1" FontWeight="Bold" FontSize="14" Margin="0 20 0 5"/>
+                    <TextBlock Text="Duyuru açıklaması burada yer alacak." Margin="0 0 0 10"/>
+                    <Button Content="Detaylar" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </materialDesign:Card>
         </Grid>
     </Grid>
 </UserControl>

@@ -53,7 +53,7 @@
                 </StackPanel>
             </materialDesign:Card>
 
-            <Grid x:Name="GridMain" Grid.Row="1"/>
+            <Grid x:Name="GridMain" Grid.Row="1" Margin="15"/>
         </Grid>
 
         <!-- NAVİGATİON MENÜ -->
