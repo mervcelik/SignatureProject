@@ -55,7 +55,7 @@ public class AuthController : BaseController
             new() { RefreshToken = getRefreshTokenFromCookies(), IpAddress = getIpAddress() };
         RefreshedTokensResponse result = await Mediator.Send(refreshTokenCommand);
         setRefreshTokenToCookie(result.RefreshToken);
-        return Created(uri: "", result.AccessToken);
+        return CreateActionResult(ResponseDto<string>.Success(result.AccessToken.Token));
     }
 
     [HttpPut("RevokeToken")]
@@ -64,7 +64,7 @@ public class AuthController : BaseController
         RevokeTokenCommand revokeTokenCommand =
             new() { Token = refreshToken ?? getRefreshTokenFromCookies(), IpAddress = getIpAddress() };
         RevokedTokenResponse result = await Mediator.Send(revokeTokenCommand);
-        return Ok(result);
+        return CreateActionResult(ResponseDto<RevokedTokenResponse>.Success(result));
     }
 
     [HttpGet("EnableEmailAuthenticator")]

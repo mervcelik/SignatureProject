@@ -1,8 +1,12 @@
 ﻿using ApiService.Registration;
+using ApiService.Services;
+using Core.Security.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using Signify.WPF.Extensions;
 using Signify.WPF.Windows;
 using System.Configuration;
 using System.Data;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Signify.WPF
@@ -12,35 +16,57 @@ namespace Signify.WPF
     /// </summary>
     public partial class App : System.Windows.Application
     {
-        public static string AccessToken { get; set; }
-        public static string RefreshToken { get; set; }
+        public static string? AccessToken { get; set; }
         public static IServiceProvider ServiceProvider { get; private set; }
 
-        private void Application_Startup(object sender, StartupEventArgs e)
+        private async void Application_Startup(object sender, StartupEventArgs e)
         {
-            AccessToken = LoadAccessToken();
-
-            var serviceCollection = new ServiceCollection();
-            ConfigureServices(serviceCollection);
-
-            ServiceProvider = serviceCollection.BuildServiceProvider();
-
-            if (string.IsNullOrEmpty(AccessToken))
+            try
             {
-                var loginWindow = ServiceProvider.GetRequiredService<LoginWindow>();
-                loginWindow.Show();
+
+                var serviceCollection = new ServiceCollection();
+                ConfigureServices(serviceCollection);
+
+                ServiceProvider = serviceCollection.BuildServiceProvider();
+
+                AccessToken = await LoadAccessToken();
+
+                if (string.IsNullOrEmpty(AccessToken))
+                {
+                    var loginWindow = ServiceProvider.GetRequiredService<LoginWindow>();
+                    loginWindow.Show();
+                }
+                else
+                {
+                    var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+                    mainWindow.Show();
+                }
             }
-            else
+            catch (Exception)
             {
-                var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
-                mainWindow.Show();
+
+               // throw;
             }
         }
 
-        private string LoadAccessToken()
+        private async Task<string?> LoadAccessToken()
         {
-            var token = Signify.WPF.Properties.Settings.Default.Token;
-            return token;
+            try
+            {
+                var token = Signify.WPF.Properties.Settings.Default.Token;
+                var accessTokenExpiration = token.IsExpired();
+                if (accessTokenExpiration)
+                {
+                    var authApiService = ServiceProvider.GetRequiredService<AuthApiService>();
+                    var newToken = RNH.GetOrThrow(await authApiService.RefreshTokenAsync());
+                    return newToken != null ? newToken : null;
+                }
+                return token;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         private void ConfigureServices(IServiceCollection services)

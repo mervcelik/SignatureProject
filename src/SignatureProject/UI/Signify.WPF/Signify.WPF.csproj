@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\core.Package\Core.Security\Core.Security.csproj" />
     <ProjectReference Include="..\..\ApiService\ApiService.csproj" />
   </ItemGroup>
 
