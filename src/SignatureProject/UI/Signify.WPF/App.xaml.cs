@@ -17,6 +17,7 @@ namespace Signify.WPF
     public partial class App : System.Windows.Application
     {
         public static string? AccessToken { get; set; }
+        public static string? Token { get; set; }
         public static IServiceProvider ServiceProvider { get; private set; }
 
         private async void Application_Startup(object sender, StartupEventArgs e)
@@ -45,7 +46,7 @@ namespace Signify.WPF
             catch (Exception)
             {
 
-               // throw;
+                // throw;
             }
         }
 
@@ -53,15 +54,20 @@ namespace Signify.WPF
         {
             try
             {
-                var token = Signify.WPF.Properties.Settings.Default.Token;
-                var accessTokenExpiration = token.IsExpired();
+                var accessToken = Signify.WPF.Properties.Settings.Default.AccessToken;
+                var refreshToken = Signify.WPF.Properties.Settings.Default.RefreshToken;
+                Token = refreshToken;
+                var accessTokenExpiration = accessToken.IsExpired();
                 if (accessTokenExpiration)
                 {
                     var authApiService = ServiceProvider.GetRequiredService<AuthApiService>();
-                    var newToken = RNH.GetOrThrow(await authApiService.RefreshTokenAsync());
-                    return newToken != null ? newToken : null;
+                    var newToken = RNH.GetOrThrow(await authApiService.ReLoginAsync(new Application.Features.Auth.Commands.ReLogin.ReLoginCommand
+                    {
+                        Token = Token,
+                    }));
+                    return newToken != null && newToken.Token != null ? newToken.AccessToken : null;
                 }
-                return token;
+                return accessToken;
             }
             catch (Exception)
             {

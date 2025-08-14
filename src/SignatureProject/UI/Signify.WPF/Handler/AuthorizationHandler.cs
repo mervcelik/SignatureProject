@@ -30,10 +30,14 @@ public class AuthorizationHandler : DelegatingHandler
             var accessTokenExpiration = token.IsExpired();
             if (!accessTokenExpiration)
             {
-                var newToken = RNH.GetOrThrow(await _authApiService.RefreshTokenAsync());
+                var newToken = RNH.GetOrThrow(await _authApiService.ReLoginAsync(new Application.Features.Auth.Commands.ReLogin.ReLoginCommand
+                {
+                    Token = App.Token,
+                }));
                 if (newToken != null)
                 {
-                    App.AccessToken = newToken;
+                    App.AccessToken = newToken.AccessToken;
+                    App.Token = newToken.Token;
                 }
             }
         }

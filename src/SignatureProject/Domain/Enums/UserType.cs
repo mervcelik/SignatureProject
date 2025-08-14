@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Enums;
 
-public enum AuthenticatorType
+public enum UserType
 {
     None = 0,
-    Email = 1,
+    Individual = 1,
+    Institutional = 2,
 }

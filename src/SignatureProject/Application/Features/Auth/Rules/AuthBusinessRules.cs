@@ -37,18 +37,6 @@ public class AuthBusinessRules : BaseBusinessRules
             await throwBusinessException(AuthMessages.EmailAuthenticatorDontExists);
     }
 
-    public async Task OtpAuthenticatorShouldBeExists(OtpAuthenticator? otpAuthenticator)
-    {
-        if (otpAuthenticator is null)
-            await throwBusinessException(AuthMessages.OtpAuthenticatorDontExists);
-    }
-
-    public async Task OtpAuthenticatorThatVerifiedShouldNotBeExists(OtpAuthenticator? otpAuthenticator)
-    {
-        if (otpAuthenticator is not null && otpAuthenticator.IsVerified)
-            await throwBusinessException(AuthMessages.AlreadyVerifiedOtpAuthenticatorIsExists);
-    }
-
     public async Task EmailAuthenticatorActivationKeyShouldBeExists(EmailAuthenticator emailAuthenticator)
     {
         if (emailAuthenticator.ActivationKey is null)
@@ -71,12 +59,6 @@ public class AuthBusinessRules : BaseBusinessRules
     {
         if (refreshToken == null)
             await throwBusinessException(AuthMessages.RefreshDontExists);
-    }
-
-    public async Task RefreshTokenShouldBeActive(RefreshToken refreshToken)
-    {
-        if (refreshToken.Revoked != null && DateTime.UtcNow >= refreshToken.Expires)
-            await throwBusinessException(AuthMessages.InvalidRefreshToken);
     }
 
     public async Task UserEmailShouldBeNotExists(string email)

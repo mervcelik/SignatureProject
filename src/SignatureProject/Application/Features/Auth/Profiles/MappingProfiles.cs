@@ -1,5 +1,4 @@
-﻿using Application.Features.Auth.Commands.RevokeToken;
-using AutoMapper;
+﻿using AutoMapper;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -15,7 +14,6 @@ public class MappingProfiles : Profile
     public MappingProfiles()
     {
         CreateMap<Core.Security.Entities.RefreshToken, RefreshToken>().ReverseMap();
-        CreateMap<RefreshToken, RevokedTokenResponse>().ReverseMap();
         CreateMap<Core.Security.Entities.OperationClaim, OperationClaim>().ReverseMap();
         CreateMap<Core.Security.Entities.User, User>().ReverseMap();
         CreateMap<User, Core.Security.Entities.User>().ReverseMap();

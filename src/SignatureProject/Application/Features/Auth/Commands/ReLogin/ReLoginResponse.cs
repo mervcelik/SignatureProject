@@ -1,0 +1,15 @@
+﻿using Core.Application.Responses;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Application.Features.Auth.Commands.ReLogin
+{
+    public class ReLoginResponse : IResponse
+    {
+        public string AccessToken { get; set; }
+        public string Token { get; set; }
+    }
+}

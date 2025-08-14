@@ -73,7 +73,7 @@ namespace Signify.WPF.Windows
                     if (login2.AccessToken != null)
                     {
                         App.AccessToken = login2.AccessToken.Token;
-                        Properties.Settings.Default.Token = login2.AccessToken.Token;
+                        Properties.Settings.Default.AccessToken = login2.AccessToken.Token;
                         Properties.Settings.Default.Save();
                         _mainWindow.Show();
                         this.Close();
@@ -82,7 +82,7 @@ namespace Signify.WPF.Windows
                 else if (login.AccessToken != null)
                 {
                     App.AccessToken = login.AccessToken.Token;
-                    Properties.Settings.Default.Token = login.AccessToken.Token;
+                    Properties.Settings.Default.AccessToken = login.AccessToken.Token;
                     Properties.Settings.Default.Save();
                     _mainWindow.Show();
                     this.Close();

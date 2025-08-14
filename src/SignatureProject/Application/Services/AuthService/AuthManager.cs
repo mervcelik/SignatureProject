@@ -76,54 +76,6 @@ public class AuthManager : IAuthService
         return refreshToken;
     }
 
-    public async Task RevokeRefreshToken(
-        RefreshToken refreshToken,
-        string ipAddress,
-        string? reason = null,
-        string? replacedByToken = null
-    )
-    {
-        refreshToken.Revoked = DateTime.UtcNow;
-        refreshToken.RevokedByIp = ipAddress;
-        refreshToken.ReasonRevoked = reason;
-        refreshToken.ReplacedByToken = replacedByToken;
-        await _refreshTokenRepository.UpdateAsync(refreshToken);
-    }
-
-    public async Task<RefreshToken> RotateRefreshToken(User user, RefreshToken refreshToken, string ipAddress)
-    {
-        var userEntity = new Core.Security.Entities.User
-        {
-            AuthenticatorType = (Core.Security.Enums.AuthenticatorType)user.AuthenticatorType,
-            CreatedDate = user.CreatedDate,
-            DeletedDate = user.DeletedDate,
-            Email = user.Email,
-            Id = user.Id,
-            FirstName = user.FirstName,
-            LastName = user.LastName,
-            PasswordHash = user.PasswordHash,
-            PasswordSalt = user.PasswordSalt,
-            UpdatedDate = user.UpdatedDate,
-            Status = user.Status,
-        };
-        Core.Security.Entities.RefreshToken newCoreRefreshToken = _tokenHelper.CreateRefreshToken(userEntity, ipAddress);
-        RefreshToken newRefreshToken = _mapper.Map<RefreshToken>(newCoreRefreshToken);
-        await RevokeRefreshToken(refreshToken, ipAddress, reason: "Replaced by new token", newRefreshToken.Token);
-        return newRefreshToken;
-    }
-
-    public async Task RevokeDescendantRefreshTokens(RefreshToken refreshToken, string ipAddress, string reason)
-    {
-        RefreshToken? childToken = await _refreshTokenRepository.GetAsync(predicate: r =>
-            r.Token == refreshToken.ReplacedByToken
-        );
-
-        if (childToken?.Revoked != null && childToken.Expires <= DateTime.UtcNow)
-            await RevokeRefreshToken(childToken, ipAddress, reason);
-        else
-            await RevokeDescendantRefreshTokens(refreshToken: childToken!, ipAddress, reason);
-    }
-
     public Task<RefreshToken> CreateRefreshToken(User user, string ipAddress)
     {
         var userEntity = new Core.Security.Entities.User

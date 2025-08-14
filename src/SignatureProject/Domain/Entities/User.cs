@@ -17,11 +17,11 @@ public class User : Entity<int>
     public byte[] PasswordHash { get; set; }
     public bool Status { get; set; }
     public AuthenticatorType AuthenticatorType { get; set; }
+    public UserType UserType { get; set; }
 
 
     public virtual ICollection<UserOperationClaim>? UserOperationClaims { get; set; } = null!;
     public virtual ICollection<RefreshToken>? RefreshTokens { get; set; } = null!;
-    public virtual ICollection<OtpAuthenticator>? OtpAuthenticators { get; set; } = null!;
     public virtual ICollection<EmailAuthenticator>? EmailAuthenticators { get; set; } = null!;
     public User()
     {

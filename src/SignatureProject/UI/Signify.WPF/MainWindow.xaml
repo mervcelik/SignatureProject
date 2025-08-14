@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Signify.WPF"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Signify" Height="768" Width="1024" Background="#F5F3FF" WindowStyle="None">
+        Title="Signify" Height="768" Width="1024" Background="#d9ead3  " WindowStyle="None">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -36,7 +36,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <materialDesign:Card Grid.Row="0" materialDesign:ElevationAssist.Elevation="Dp1"  Background="#F5F3FF" Height="40" MouseDown="TitleBar_MouseDown" VerticalAlignment="Top" MouseDoubleClick="TitleBar_MouseDoubleClick">
+            <materialDesign:Card Grid.Row="0" materialDesign:ElevationAssist.Elevation="Dp1"  Background="White" Height="40" MouseDown="TitleBar_MouseDown" VerticalAlignment="Top" MouseDoubleClick="TitleBar_MouseDoubleClick">
                 <StackPanel Name="TopBar" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0" Width="103">
 
                     <Button x:Name="WindowMinimize" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Click="WindowMinimize_Click">
@@ -84,7 +84,7 @@
 
                     <Image Height="80" VerticalAlignment="Bottom"/>
                 </Grid>
-                <ListView Grid.Row="1" x:Name="ListViewMenu" Foreground="Gray" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged">
+                <ListView  Grid.Row="1" x:Name="ListViewMenu" Foreground="Gray" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged">
                     <ListViewItem x:Name="ItemHome" Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="ViewDashboard" Height="25" Width="25" Margin="10"/>

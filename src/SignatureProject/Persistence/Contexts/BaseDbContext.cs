@@ -17,11 +17,14 @@ public class BaseDbContext : DbContext
     public IConfiguration Configuration { get; set; }
    
     public DbSet<OperationClaim> OperationClaims { get; set; }
-    public DbSet<OtpAuthenticator> OtpAuthenticators { get; set; }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
     public DbSet<EmailAuthenticator> EmailAuthenticators { get; set; }
+    public DbSet<Company> Companies { get; set; }
+    public DbSet<CompanyUser> CompanyUsers { get; set; }
+    public DbSet<Campaign> Campaigns { get; set; }
+    public DbSet<CampaignUser> CampaignUsers { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
     {

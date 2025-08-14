@@ -3,8 +3,9 @@ using Application.Features.Users.Rules;
 using Application.Repositories;
 using AutoMapper;
 using Core.Application.Piplines.Authorization;
-using Domain.Entities;
 using Core.Security.Hashing;
+using Domain.Entities;
+using Domain.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ public class CreateUserCommand : IRequest<CreatedUserResponse>, ISecuredRequest
     public string LastName { get; set; }
     public string Email { get; set; }
     public string Password { get; set; }
+    public UserType UserType { get; set; }
 
     public CreateUserCommand()
     {

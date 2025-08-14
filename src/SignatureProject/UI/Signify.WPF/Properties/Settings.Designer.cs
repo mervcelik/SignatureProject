@@ -50,12 +50,24 @@ namespace Signify.WPF.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Token {
+        public string AccessToken {
             get {
-                return ((string)(this["Token"]));
+                return ((string)(this["AccessToken"]));
             }
             set {
-                this["Token"] = value;
+                this["AccessToken"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RefreshToken {
+            get {
+                return ((string)(this["RefreshToken"]));
+            }
+            set {
+                this["RefreshToken"] = value;
             }
         }
     }

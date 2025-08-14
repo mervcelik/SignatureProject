@@ -21,21 +21,17 @@ public class AuthenticatorManager : IAuthenticatorService
     private readonly IEmailAuthenticatorRepository _emailAuthenticatorRepository;
     private readonly IMailService _mailService;
     private readonly IOtpAuthenticatorHelper _otpAuthenticatorHelper;
-    private readonly IOtpAuthenticatorRepository _otpAuthenticatorRepository;
 
     public AuthenticatorManager(
         IEmailAuthenticatorHelper emailAuthenticatorHelper,
         IEmailAuthenticatorRepository emailAuthenticatorRepository,
         IMailService mailService,
-        IOtpAuthenticatorHelper otpAuthenticatorHelper,
-        IOtpAuthenticatorRepository otpAuthenticatorRepository
-    )
+        IOtpAuthenticatorHelper otpAuthenticatorHelper)
     {
         _emailAuthenticatorHelper = emailAuthenticatorHelper;
         _emailAuthenticatorRepository = emailAuthenticatorRepository;
         _mailService = mailService;
         _otpAuthenticatorHelper = otpAuthenticatorHelper;
-        _otpAuthenticatorRepository = otpAuthenticatorRepository;
     }
 
     public async Task<EmailAuthenticator> CreateEmailAuthenticator(User user)
@@ -48,18 +44,6 @@ public class AuthenticatorManager : IAuthenticatorService
                 IsVerified = false
             };
         return emailAuthenticator;
-    }
-
-    public async Task<OtpAuthenticator> CreateOtpAuthenticator(User user)
-    {
-        OtpAuthenticator otpAuthenticator =
-            new()
-            {
-                UserId = user.Id,
-                SecretKey = await _otpAuthenticatorHelper.GenerateSecretKey(),
-                IsVerified = false
-            };
-        return otpAuthenticator;
     }
 
     public async Task<string> ConvertSecretKeyToString(byte[] secretKey)
@@ -78,8 +62,6 @@ public class AuthenticatorManager : IAuthenticatorService
     {
         if (user.AuthenticatorType is AuthenticatorType.Email)
             await VerifyAuthenticatorCodeWithEmail(user, authenticatorCode);
-        else if (user.AuthenticatorType is AuthenticatorType.Otp)
-            await VerifyAuthenticatorCodeWithOtp(user, authenticatorCode);
     }
 
     private async Task SendAuthenticatorCodeWithEmail(User user)
@@ -119,15 +101,5 @@ public class AuthenticatorManager : IAuthenticatorService
             throw new BusinessException("Authenticator code is invalid.");
         emailAuthenticator.ActivationKey = null;
         await _emailAuthenticatorRepository.UpdateAsync(emailAuthenticator);
-    }
-
-    private async Task VerifyAuthenticatorCodeWithOtp(User user, string authenticatorCode)
-    {
-        OtpAuthenticator? otpAuthenticator = await _otpAuthenticatorRepository.GetAsync(predicate: e => e.UserId == user.Id);
-        if (otpAuthenticator is null)
-            throw new NotFoundException("Otp Authenticator not found.");
-        bool result = await _otpAuthenticatorHelper.VerifyCode(otpAuthenticator.SecretKey, authenticatorCode);
-        if (!result)
-            throw new BusinessException("Authenticator code is invalid.");
     }
 }

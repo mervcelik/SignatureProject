@@ -1,12 +1,8 @@
 ﻿using ApiService.Base;
-using Application.Features.Auth.Commands.EnableEmailAuthenticator;
-using Application.Features.Auth.Commands.EnableOtpAuthenticator;
 using Application.Features.Auth.Commands.Login;
-using Application.Features.Auth.Commands.RefreshToken;
 using Application.Features.Auth.Commands.Register;
-using Application.Features.Auth.Commands.RevokeToken;
+using Application.Features.Auth.Commands.ReLogin;
 using Application.Features.Auth.Commands.VerifyEmailAuthenticator;
-using Application.Features.Auth.Commands.VerifyOtpAuthenticator;
 using Core.Application.Dtos;
 using Core.CrossCuttingConcerns.Dtos;
 using Core.CrossCuttingConcerns.Extensions;
@@ -41,17 +37,10 @@ public class AuthApiService : BaseApiService
         return responsebody;
     }
 
-    public async Task<ResponseDto<string>> RefreshTokenAsync()
+    public async Task<ResponseDto<ReLoginResponse>> ReLoginAsync(ReLoginCommand reLoginCommand)
     {
-        var response = await _httpClient.GetAsync("Auth/RefreshToken");
-        var responsebody = await response.Content.ReadFromJsonAsync<ResponseDto<string>>();
-        return responsebody;
-    }
-
-    public async Task<ResponseDto<RevokedTokenResponse>> RevokeTokenAsync(RevokeTokenCommand? revokeTokenCommand)
-    {
-        var response = await _httpClient.PutAsJsonAsync("Auth/RevokeToken", revokeTokenCommand);
-        var responsebody = await response.Content.ReadFromJsonAsync<ResponseDto<RevokedTokenResponse>>();
+        var response = await _httpClient.PostAsJsonAsync("Auth/ReLogin", reLoginCommand);
+        var responsebody = await response.Content.ReadFromJsonAsync<ResponseDto<ReLoginResponse>>();
         return responsebody;
     }
 
@@ -62,23 +51,9 @@ public class AuthApiService : BaseApiService
         return responsebody;
     }
 
-    public async Task<ResponseDto<EnabledOtpAuthenticatorResponse>> EnableOtpAuthenticatorAsync()
-    {
-        var response = await _httpClient.GetAsync("Auth/EnableOtpAuthenticator");
-        var responsebody = await response.Content.ReadFromJsonAsync<ResponseDto<EnabledOtpAuthenticatorResponse>>();
-        return responsebody;
-    }
-
     public async Task<ResponseDto<object>> VerifyEmailAuthenticatorAsync(VerifyEmailAuthenticatorCommand verifyEmailAuthenticatorCommand)
     {
         var response = await _httpClient.GetAsync($"Auth/VerifyEmailAuthenticator?{verifyEmailAuthenticatorCommand.ToQueryString()}");
-        var responsebody = await response.Content.ReadFromJsonAsync<ResponseDto<object>>();
-        return responsebody;
-    }
-
-    public async Task<ResponseDto<object>> VerifyOtpAuthenticatorAsync(VerifyOtpAuthenticatorCommand verifyOtpAuthenticatorCommand)
-    {
-        var response = await _httpClient.PostAsJsonAsync("Auth/VerifyOtpAuthenticator", verifyOtpAuthenticatorCommand);
         var responsebody = await response.Content.ReadFromJsonAsync<ResponseDto<object>>();
         return responsebody;
     }

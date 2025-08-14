@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Signify.WPF.UserControls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"  Background="#F5F3FF">
+             d:DesignHeight="450" d:DesignWidth="800"  Background="Transparent">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -25,7 +25,7 @@
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
 
@@ -34,7 +34,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <materialDesign:Card Grid.Row="0" materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="20" Padding="5" Margin="5">
+            <materialDesign:Card Grid.Row="0" materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="10" Padding="5" Margin="5">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -76,7 +76,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <materialDesign:Card Grid.Column="0" materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="20" Padding="5" Margin="5">
+                <materialDesign:Card Grid.Column="0" materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="10" Padding="5" Margin="5">
                     son imzalar listelecek
                 </materialDesign:Card>
                 
@@ -85,10 +85,10 @@
                         <RowDefinition Height="150"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <materialDesign:Card Grid.Row="0"  materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="20" Padding="5" Margin="5">
+                    <materialDesign:Card Grid.Row="0"  materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="10" Padding="5" Margin="5">
 
                     </materialDesign:Card>
-                    <materialDesign:Card Grid.Row="1"  materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="20" Padding="5" Margin="5">
+                    <materialDesign:Card Grid.Row="1"  materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="10" Padding="5" Margin="5">
 
                     </materialDesign:Card>
                 </Grid>
@@ -97,14 +97,37 @@
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="180"/>
+                <RowDefinition Height="260"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <materialDesign:Card Grid.Row="0" Margin="5" materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="20">
-                <Calendar />
+            <materialDesign:Card Grid.Row="0" Margin="5" materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="10" Padding="10">
+                <Calendar>
+                    <Calendar.Resources>
+                        <Style TargetType="Calendar">
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Setter Property="Background" Value="White"/>
+                        </Style>
+                        <Style TargetType="CalendarDayButton">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Setter Property="FontSize" Value="14"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#3D5AFE"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Calendar.Resources>
+                    <Calendar.LayoutTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                    </Calendar.LayoutTransform>
+                </Calendar>
             </materialDesign:Card>
-            <materialDesign:Card Grid.Row="1" Margin="5" materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="20">
+            
+            <materialDesign:Card Grid.Row="1" Margin="5" materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="10">
                 <StackPanel Margin="10">
                     <TextBlock Text="Kampanya 1" FontWeight="Bold" FontSize="14" Margin="0 0 0 5"/>
                     <TextBlock Text="Kampanya açıklaması burada yer alacak." Margin="0 0 0 10"/>

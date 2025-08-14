@@ -4,16 +4,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistence.Entityconfigurations;
 
-public class EmailAuthenticatorConfiguration : IEntityTypeConfiguration<EmailAuthenticator>
+public class CompanyUserConfiguration : IEntityTypeConfiguration<CompanyUser>
 {
-    public void Configure(EntityTypeBuilder<EmailAuthenticator> builder)
+    public void Configure(EntityTypeBuilder<CompanyUser> builder)
     {
-        builder.ToTable("EmailAuthenticators").HasKey(ea => ea.Id);
+        builder.ToTable("CompanyUsers").HasKey(ea => ea.Id);
 
         builder.Property(ea => ea.Id).HasColumnName("Id").IsRequired();
         builder.Property(ea => ea.UserId).HasColumnName("UserId").IsRequired();
-        builder.Property(ea => ea.ActivationKey).HasColumnName("ActivationKey");
-        builder.Property(ea => ea.IsVerified).HasColumnName("IsVerified").IsRequired();
+        builder.Property(ea => ea.CompanyId).HasColumnName("CompanyId").IsRequired();
+
         builder.Property(ea => ea.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(ea => ea.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(ea => ea.DeletedDate).HasColumnName("DeletedDate");
@@ -21,5 +21,6 @@ public class EmailAuthenticatorConfiguration : IEntityTypeConfiguration<EmailAut
         builder.HasQueryFilter(ea => !ea.DeletedDate.HasValue);
 
         builder.HasOne(ea => ea.User);
+        builder.HasOne(ea => ea.Company);
     }
 }

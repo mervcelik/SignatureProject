@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain.Enums;
 
 namespace Persistence.Entityconfigurations;
 
@@ -24,11 +25,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.PasswordHash).HasColumnName("PasswordHash").IsRequired();
         builder.Property(u => u.Status).HasColumnName("Status").HasDefaultValue(true);
         builder.Property(u => u.AuthenticatorType).HasColumnName("AuthenticatorType").IsRequired();
+        builder.Property(u => u.UserType).HasColumnName("UserType").IsRequired();
 
         builder.HasMany(u => u.UserOperationClaims);
         builder.HasMany(u => u.RefreshTokens);
         builder.HasMany(u => u.EmailAuthenticators);
-        builder.HasMany(u => u.OtpAuthenticators);
 
         builder.HasData(getSeeds());
         builder.Property(u => u.CreatedDate).HasColumnName("CreatedDate").IsRequired();
@@ -42,21 +43,23 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         List<User> users = new();
 
-        HashingHelper.CreatePasswordHash(
-            password: "Passw0rd",
-            passwordHash: out byte[] passwordHash,
-            passwordSalt: out byte[] passwordSalt
-        );
+        //HashingHelper.CreatePasswordHash(
+        //    password: "Passw0rd",
+        //    passwordHash: out byte[] passwordHash,
+        //    passwordSalt: out byte[] passwordSalt
+        //);
         User adminUser =
             new()
             {
                 Id = 1,
                 FirstName = "Admin",
-                LastName = "NArchitecture",
+                LastName = "Admin",
                 Email = "admin@admin.com",
                 Status = true,
-                PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt
+                //PasswordHash = passwordHash,
+                //PasswordSalt = passwordSalt,
+                UserType
+                = UserType.Institutional,
             };
         users.Add(adminUser);
 

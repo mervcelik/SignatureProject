@@ -21,6 +21,16 @@ namespace Signify.WPF
         public MainWindow()
         {
             InitializeComponent();
+            try
+            {
+                ListViewMenu.SelectedItem = ItemHome;
+
+            }
+            catch (Exception)
+            {
+
+                // throw;
+            }
         }
         #region TopBar buttons Events
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -108,6 +118,6 @@ namespace Signify.WPF
         }
         #endregion
 
-      
+
     }
 }
