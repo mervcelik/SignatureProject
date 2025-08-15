@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Signify.WPF.UserControls"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:campaigns="clr-namespace:Signify.WPF.UserControls.Campaigns"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"  Background="Transparent">
     <UserControl.Resources>
@@ -22,7 +22,7 @@
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid >
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="300"/>
@@ -41,13 +41,13 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0">
+                    <StackPanel Grid.Column="0" Margin="10px">
                         <TextBlock Text="Welcome back Admin!" 
-                   FontSize="15" 
+                   FontSize="30" 
                    FontWeight="Bold" 
                    HorizontalAlignment="Left" 
                    VerticalAlignment="Center" 
-                   Margin="0 5 0 0"/>
+                   Margin="0 5 0 0" TextWrapping="Wrap"/>
 
                         <TextBlock Text="You have learned 80% of your goal this week!" 
                    Foreground="SlateGray" 
@@ -71,7 +71,7 @@
 
             </materialDesign:Card>
 
-            <Grid Grid.Row="1" Margin="5"   >
+            <Grid Grid.Row="1" Margin="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -127,16 +127,8 @@
                 </Calendar>
             </materialDesign:Card>
             
-            <materialDesign:Card Grid.Row="1" Margin="5" materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="10">
-                <StackPanel Margin="10">
-                    <TextBlock Text="Kampanya 1" FontWeight="Bold" FontSize="14" Margin="0 0 0 5"/>
-                    <TextBlock Text="Kampanya açıklaması burada yer alacak." Margin="0 0 0 10"/>
-                    <Button Content="Detaylar" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Left"/>
-
-                    <TextBlock Text="Duyuru 1" FontWeight="Bold" FontSize="14" Margin="0 20 0 5"/>
-                    <TextBlock Text="Duyuru açıklaması burada yer alacak." Margin="0 0 0 10"/>
-                    <Button Content="Detaylar" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Left"/>
-                </StackPanel>
+            <materialDesign:Card Grid.Row="1" Margin="5"  materialDesign:ElevationAssist.Elevation="Dp2"  Background="White" UniformCornerRadius="10">
+                <campaigns:CampaignListPage></campaigns:CampaignListPage>
             </materialDesign:Card>
         </Grid>
     </Grid>

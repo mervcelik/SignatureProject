@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="Signify.WPF.UserControls.Campaigns.CampaignListPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Signify.WPF.UserControls.Campaigns"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Background="White" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <Style TargetType="ProgressBar">
+            <Setter Property="Height" Value="8"/>
+            <Setter Property="Foreground" Value="#4CAF50"/>
+        </Style>
+    </UserControl.Resources>
+
+    <StackPanel Margin="10">
+        <!-- Üst başlık -->
+        <materialDesign:Card Padding="10" Margin="0,0,0,10" Background="White" materialDesign:ElevationAssist.Elevation="Dp2" >
+            <DockPanel>
+                <TextBlock Text="Kampanyalar" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" DockPanel.Dock="Left"/>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
+
+                    <Button Style="{StaticResource MaterialDesignIconButton}" ToolTip="MaterialDesignIconButton" Click="Previous_Click">
+                        <materialDesign:PackIcon Kind="ArrowLeftDropCircleOutline"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignIconButton}" ToolTip="MaterialDesignIconButton" Click="Next_Click">
+                        <materialDesign:PackIcon Kind="ArrowRightDropCircleOutline" />
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+        </materialDesign:Card>
+
+        <!-- Liste -->
+        <ListView ItemsSource="{Binding Campaigns}" Background="Transparent" BorderThickness="0" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <materialDesign:Card Padding="10" Margin="0,0,0,10" Background="White" materialDesign:ElevationAssist.Elevation="Dp2" Width="250">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="Bold" Foreground="#333"/>
+                            <TextBlock Text="{Binding Description}" Foreground="#666" FontSize="13" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding ExpiredDate, StringFormat='Son Tarih: {0:dd.MM.yyyy}'}" FontSize="12" Foreground="#888"/>
+
+                            <!-- Progress -->
+                            <ProgressBar Value="{Binding ParticipationRate, Mode=OneWay}" Maximum="100" Margin="0,5,0,0"/>
+                            <TextBlock Text="{Binding CurrentParticipants, StringFormat='Katılan: {0}'}" Foreground="#555" FontSize="12"/>
+                            <TextBlock Text="{Binding MaxParticipants, StringFormat='Kontenjan: {0}'}" Foreground="#555" FontSize="12"/>
+                        </StackPanel>
+                    </materialDesign:Card>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackPanel>
+</UserControl>

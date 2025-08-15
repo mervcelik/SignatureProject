@@ -1,8 +1,11 @@
-﻿using ApiService.Registration;
+﻿using ApiService.Base;
+using ApiService.Registration;
 using ApiService.Services;
 using Core.Security.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Signify.WPF.Extensions;
+using Signify.WPF.Handler;
+using Signify.WPF.UserControls;
 using Signify.WPF.Windows;
 using System.Configuration;
 using System.Data;
@@ -43,7 +46,7 @@ namespace Signify.WPF
                     mainWindow.Show();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 // throw;
@@ -80,8 +83,18 @@ namespace Signify.WPF
             services.AddSingleton<MainWindow>();
             services.AddSingleton<LoginWindow>();
             services.AddSingleton<VerifyEmailWindow>();
+            services.AddSingleton<HomePage>();
 
+
+            services.AddHttpClient<ApiServiceFactory>("AuthorizedClient")
+    .AddHttpMessageHandler<AuthorizationHandler>();
             services.AddApiServices();
+        }
+
+
+        public static T GetService<T>() where T : class
+        {
+            return ServiceProvider.GetRequiredService<T>();
         }
     }
 }

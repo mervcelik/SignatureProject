@@ -24,6 +24,10 @@
 
   <ItemGroup>
     <Folder Include="Features\Auth\Resources\Locales\" />
+    <Folder Include="Features\Campaigns\Commands\" />
+    <Folder Include="Features\Campaigns\Constants\" />
+    <Folder Include="Features\Campaigns\Rules\" />
+    <Folder Include="Features\Campaigns\Resources\" />
     <Folder Include="Features\OperationClaims\Resources\Locales\" />
     <Folder Include="Features\UserOperationClaims\Resources\Locales\" />
   </ItemGroup>

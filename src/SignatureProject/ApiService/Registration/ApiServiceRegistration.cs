@@ -19,6 +19,7 @@ public static class ApiServiceRegistration
         });
         services.AddTransient<AuthApiService>();
         services.AddTransient<UserApiService>();
+        services.AddTransient<CampaignApiService>();
         return services;
     }
 }

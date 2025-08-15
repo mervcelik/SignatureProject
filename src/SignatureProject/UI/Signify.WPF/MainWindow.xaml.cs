@@ -18,9 +18,11 @@ namespace Signify.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        HomePage _homePage;
+        public MainWindow(HomePage homePage)
         {
             InitializeComponent();
+            _homePage = homePage;
             try
             {
                 ListViewMenu.SelectedItem = ItemHome;
@@ -109,7 +111,7 @@ namespace Signify.WPF
             switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
             {
                 case "ItemHome":
-                    usc = new HomePage();
+                    usc = _homePage;
                     GridMain.Children.Add(usc);
                     break;
                 default:
